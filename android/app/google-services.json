@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "9936197716",
+    "project_id": "better-admin",
+    "storage_bucket": "better-admin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9936197716:android:ecd2a93bedb2a5460575c1",
+        "android_client_info": {
+          "package_name": "com.codanto.better_life_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-fcLfkrbDLjJzp1a9z13JO17bQygoApk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
