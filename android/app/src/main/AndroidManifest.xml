@@ -3,7 +3,7 @@ package = 'com.codanto.better_life_admin'>
     <application
         android:label="Better Life Admin"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
