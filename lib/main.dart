@@ -1,8 +1,10 @@
 import 'package:better_life_admin/services/firebase/notifications.dart';
 import 'package:better_life_admin/services/routing/router.dart';
 import 'package:better_life_admin/services/routing/routes.dart';
+import 'package:better_life_admin/src/core/utils/constants/keys.dart';
 import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
 import 'package:better_life_admin/src/injector.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,13 @@ Future<void> main() async {
   DependencyInjector.inject();
   SharedPreferences.getInstance().then((prefs) {
     Helpers.prefs = prefs; // Set the instance in your Helpers class
+    final token = prefs.getString(Keys.token);
+    final dio = Dio(BaseOptions(
+        baseUrl: 'https://goasocialmediamarketing.com/betterlifeapi/api',
+        headers: token != null
+            ? {"Authorization": 'Bearer $token', 'Accept': 'application/json'}
+            : null));
+    Helpers.dio = dio;
     runApp(const MyApp());
   });
 }

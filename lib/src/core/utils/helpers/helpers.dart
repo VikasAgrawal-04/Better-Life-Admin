@@ -14,6 +14,7 @@ enum LoggerType { d, e, i, f, t, w }
 
 class Helpers {
   static SharedPreferences? prefs;
+  static Dio? dio;
 
   static void logger({required LoggerType type, required String message}) {
     final logger = Logger(
@@ -43,21 +44,20 @@ class Helpers {
     }
   }
 
+  static void setToken(String token) {
+    dio!.options.headers = {
+      "Authorization": 'Bearer $token',
+      'Accept': 'application/json'
+    };
+  }
+
   static Future<Map<String, dynamic>?> sendRequest(
-      Dio dio, RequestType type, String path,
+      RequestType type, String path,
       {Map<String, dynamic>? queryParams,
       bool encoded = false,
       dynamic data,
       dynamic listData,
       FormData? formData}) async {
-    //Setting Token After the login
-    void _setToken(String token) {
-      dio.options.headers = {
-        "Authorization": 'Bearer $token',
-        'Accept': 'application/json'
-      };
-    }
-
     var logger = Logger(
       printer: PrettyPrinter(
           methodCount: 2,
@@ -67,16 +67,18 @@ class Helpers {
           printEmojis: true,
           printTime: false),
     );
+    logger.d('Url ${dio?.options.baseUrl}');
+    logger.d('Headers ${dio?.options.headers}');
     logger.d("PayLoad ${queryParams ?? data ?? listData}");
     try {
       Response response;
 
       switch (type) {
         case RequestType.get:
-          response = (await dio.get(path, queryParameters: queryParams));
+          response = (await dio!.get(path, queryParameters: queryParams));
           break;
         case RequestType.post:
-          response = (await dio.post(
+          response = (await dio!.post(
             path,
             options: Options(
                 contentType:
@@ -87,10 +89,10 @@ class Helpers {
           break;
         case RequestType.put:
           response =
-              await dio.put(path, data: data, queryParameters: queryParams);
+              await dio!.put(path, data: data, queryParameters: queryParams);
           break;
         case RequestType.delete:
-          response = (await dio.delete(path, queryParameters: queryParams));
+          response = (await dio!.delete(path, queryParameters: queryParams));
           break;
         default:
           return null;
