@@ -1,0 +1,59 @@
+import 'package:better_life_admin/src/views/widgets/buttons/custom_button.dart';
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+
+import 'dialog_layout.dart';
+
+class ErrorDialog extends StatelessWidget {
+  final String message;
+  final String? buttonText;
+  final VoidCallback onTap;
+
+  const ErrorDialog({
+    Key? key,
+    required this.message,
+    this.buttonText,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DialogLayout(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Gap(20),
+          Center(
+            child: Lottie.asset(
+              'assets/animations/error.json',
+              height: 100,
+              fit: BoxFit.cover,
+            ),
+          ),
+          const Gap(20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              message,
+              textAlign: TextAlign.center,
+              style: context.textTheme.titleLarge,
+            ),
+          ),
+          const Gap(20),
+          CustomButton(
+            text: buttonText ?? ('Continue'),
+            width: (MediaQuery.of(context).size).width * 0.30,
+            color: const Color.fromARGB(255, 255, 17, 0),
+            padding: const EdgeInsets.all(10),
+            onPressed: () async {
+              onTap();
+            },
+          ),
+          const Gap(20),
+        ],
+      ),
+    );
+  }
+}
