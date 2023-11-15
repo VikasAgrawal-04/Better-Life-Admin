@@ -98,4 +98,13 @@ class PushNotificationService {
     );
     print('${message.notification?.toMap()} \n notification shown: $result');
   }
+
+  Future<String?> getFCMtoken() async {
+    try {
+      return FirebaseMessaging.instance.getToken();
+    } catch (e) {
+      print(e);
+    }
+    return null;
+  }
 }
