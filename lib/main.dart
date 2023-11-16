@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,6 +28,8 @@ Future<void> main() async {
         headers: token != null
             ? {"Authorization": 'Bearer $token', 'Accept': 'application/json'}
             : null));
+    dio.interceptors
+        .add(PrettyDioLogger(requestBody: true, requestHeader: true));
     Helpers.dio = dio;
     runApp(const MyApp());
   });

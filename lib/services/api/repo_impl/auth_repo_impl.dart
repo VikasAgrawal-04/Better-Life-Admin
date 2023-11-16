@@ -20,7 +20,7 @@ class AuthRepoImpl implements AuthRepo {
       if (response?['code'] != '200') {
         return Left(ServerFailure(message: response?['message']));
       }
-      return Right(LoginResponse.fromJson(response!));
+      return Right(LoginResponse.fromJson(response ?? {}));
     } on ServerException catch (error) {
       return Left(ServerFailure(message: error.message.toString()));
     } catch (e) {

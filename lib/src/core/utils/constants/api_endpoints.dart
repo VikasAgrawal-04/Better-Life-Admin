@@ -4,5 +4,8 @@ class EndPoints {
 
   //Dashboard
   static const String newCaretakers = '/new-caretakers';
+  static const String approveCaretakers = '/approved-caretaker';
+  static const String rejectCaretakers = '/reject-caretaker';
+  static const String caretakerDetails = '/get-caretaker';
   static const String allAppointments = '/all-todays-appointments';
 }

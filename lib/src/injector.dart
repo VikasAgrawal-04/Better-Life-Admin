@@ -1,4 +1,5 @@
 import 'package:better_life_admin/src/controllers/auth_controller.dart';
+import 'package:better_life_admin/src/controllers/dashboard_controller.dart';
 import 'package:get/get.dart';
 
 class DependencyInjector {
@@ -7,6 +8,7 @@ class DependencyInjector {
   }
 
   static void _injectControllers() {
-    Get.put(AuthController());
+    Get.lazyPut(() => AuthController());
+    Get.lazyPut(() => DashboardController());
   }
 }
