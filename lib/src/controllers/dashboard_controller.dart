@@ -1,5 +1,6 @@
 import 'package:better_life_admin/services/api/repo/care_repo.dart';
 import 'package:better_life_admin/services/api/repo_impl/care_repo_impl.dart';
+import 'package:better_life_admin/src/core/utils/dialog/dialog.dart';
 import 'package:better_life_admin/src/core/utils/helpers/status_handler.dart';
 import 'package:better_life_admin/src/models/response/new_caretaker_response.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/new_appointments.dart';
@@ -33,11 +34,29 @@ class DashboardController extends GetxController {
       status.value = Status.error;
       debugPrint('Failure In Caretaker $l');
     }, (r) {
-      status.value = Status.success;
+      if (r.careData.isEmpty) {
+        status.value = Status.empty;
+      } else {
+        status.value = Status.success;
+      }
       newCareLists.clear();
       newCareLists.addAll(r.careData);
     });
   }
 
   Future<void> rfh() async {}
+
+  Future<void> actionOnApplication(
+      {bool reject = false, required int caretakerId}) async {
+    final result = await _repo.actionOnApplication(
+        caretakerId: caretakerId, reject: reject);
+    result.fold((l) {
+      debugPrint('Failure In Action Caretaker $l');
+    }, (r) {
+      Dialogs.success(r['message'], onTap: () {
+        fetchNewCaretaker();
+        Get.back();
+      });
+    });
+  }
 }

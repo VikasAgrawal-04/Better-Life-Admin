@@ -98,14 +98,20 @@ class _NewCareRequestsState extends State<NewCareRequests> {
                         child: CustomButton(
                       height: 5.h,
                       text: 'Accept',
-                      onPressed: () async {},
+                      onPressed: () async {
+                        await dashboardController.actionOnApplication(
+                            caretakerId: caretaker.userid);
+                      },
                     )),
                     SizedBox(width: 4.w),
                     Expanded(
                         child: CustomButton(
                       height: 5.h,
                       text: 'Reject',
-                      onPressed: () async {},
+                      onPressed: () async {
+                        await dashboardController.actionOnApplication(
+                            caretakerId: caretaker.userid, reject: true);
+                      },
                     )),
                   ],
                 )
