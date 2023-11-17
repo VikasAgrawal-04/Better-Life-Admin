@@ -11,4 +11,5 @@ class EndPoints {
 
   //Users
   static const String customers = '/customers';
+  static const String caretaker = '/caretakers';
 }

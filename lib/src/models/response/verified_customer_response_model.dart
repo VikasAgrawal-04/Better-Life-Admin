@@ -118,7 +118,7 @@ class CustomerAppointment {
   final String diet;
   final int numbercaretakers;
   final String? caretaker2;
-  final String? rating2;
+  final int? rating2;
   final String? ratecomment2;
 
   CustomerAppointment({

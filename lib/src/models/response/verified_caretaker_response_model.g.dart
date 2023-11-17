@@ -1,41 +1,50 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'verified_customer_response_model.dart';
+part of 'verified_caretaker_response_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-VerifiedCustomerResponse _$VerifiedCustomerResponseFromJson(
+VerifiedCaretakerModel _$VerifiedCaretakerModelFromJson(
         Map<String, dynamic> json) =>
-    VerifiedCustomerResponse(
+    VerifiedCaretakerModel(
       status: json['status'] as bool,
-      customerData: (json['data'] as List<dynamic>)
-          .map((e) => VerifiedCustomers.fromJson(e as Map<String, dynamic>))
+      caretakerData: (json['data'] as List<dynamic>)
+          .map((e) => VerifiedCaretaker.fromJson(e as Map<String, dynamic>))
           .toList(),
       code: json['code'] as String,
       message: json['message'] as String,
     );
 
-Map<String, dynamic> _$VerifiedCustomerResponseToJson(
-        VerifiedCustomerResponse instance) =>
+Map<String, dynamic> _$VerifiedCaretakerModelToJson(
+        VerifiedCaretakerModel instance) =>
     <String, dynamic>{
       'status': instance.status,
-      'data': instance.customerData,
+      'data': instance.caretakerData,
       'code': instance.code,
       'message': instance.message,
     };
 
-VerifiedCustomers _$VerifiedCustomersFromJson(Map<String, dynamic> json) =>
-    VerifiedCustomers(
+VerifiedCaretaker _$VerifiedCaretakerFromJson(Map<String, dynamic> json) =>
+    VerifiedCaretaker(
       entryid: json['entryid'] as int,
       userid: json['userid'] as int,
       entrydatetime: json['entrydatetime'] as String,
+      qualification: json['qualification'] as String,
+      aadhar: json['aadhar'] as String,
       address: json['address'] as String,
       pincode: json['pincode'] as String,
-      father: json['father'] as String,
-      mother: json['mother'] as String,
-      secondphone: json['secondphone'] as String?,
+      city: json['city'] as String?,
+      state: json['state'] as String?,
+      dateofbirth: json['dateofbirth'] as String,
+      employedat: json['employedat'] as String,
+      profile: json['profile'] as String,
+      interview: json['interview'] as String,
+      gender: json['gender'] as String,
+      approved: json['approved'] as String?,
+      candrive: json['candrive'] as String,
+      approvedtodrive: json['approvedtodrive'] as String?,
       fullname: json['fullname'] as String,
       email: json['email'] as String,
       mobile: json['mobile'] as String,
@@ -48,21 +57,30 @@ VerifiedCustomers _$VerifiedCustomersFromJson(Map<String, dynamic> json) =>
       createdatetime: json['createdatetime'] as String,
       isotpverified: json['isotpverified'] as String,
       fcm: json['firebase_device_token'] as String,
-      customerAppt: (json['customer_appointment'] as List<dynamic>)
-          .map((e) => CustomerAppointment.fromJson(e as Map<String, dynamic>))
+      careAppt: (json['caretaker_appointment'] as List<dynamic>)
+          .map((e) => CareAppointment.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$VerifiedCustomersToJson(VerifiedCustomers instance) =>
+Map<String, dynamic> _$VerifiedCaretakerToJson(VerifiedCaretaker instance) =>
     <String, dynamic>{
       'entryid': instance.entryid,
       'userid': instance.userid,
       'entrydatetime': instance.entrydatetime,
+      'qualification': instance.qualification,
+      'aadhar': instance.aadhar,
       'address': instance.address,
       'pincode': instance.pincode,
-      'father': instance.father,
-      'mother': instance.mother,
-      'secondphone': instance.secondphone,
+      'city': instance.city,
+      'state': instance.state,
+      'dateofbirth': instance.dateofbirth,
+      'employedat': instance.employedat,
+      'profile': instance.profile,
+      'interview': instance.interview,
+      'gender': instance.gender,
+      'approved': instance.approved,
+      'candrive': instance.candrive,
+      'approvedtodrive': instance.approvedtodrive,
       'fullname': instance.fullname,
       'email': instance.email,
       'mobile': instance.mobile,
@@ -75,11 +93,11 @@ Map<String, dynamic> _$VerifiedCustomersToJson(VerifiedCustomers instance) =>
       'createdatetime': instance.createdatetime,
       'isotpverified': instance.isotpverified,
       'firebase_device_token': instance.fcm,
-      'customer_appointment': instance.customerAppt,
+      'caretaker_appointment': instance.careAppt,
     };
 
-CustomerAppointment _$CustomerAppointmentFromJson(Map<String, dynamic> json) =>
-    CustomerAppointment(
+CareAppointment _$CareAppointmentFromJson(Map<String, dynamic> json) =>
+    CareAppointment(
       apptid: json['apptid'] as int,
       createdatetime: json['createdatetime'] as String,
       customerid: json['customerid'] as int,
@@ -100,7 +118,7 @@ CustomerAppointment _$CustomerAppointmentFromJson(Map<String, dynamic> json) =>
       hospital: json['hospital'] as String,
       doctor: json['doctor'] as String,
       purpose: json['purpose'] as String,
-      caretakerid: json['caretakerid'] as int?,
+      caretakerid: json['caretakerid'] as int,
       amount: json['amount'] as String,
       paid: json['paid'] as String,
       otp: json['otp'] as String,
@@ -122,8 +140,7 @@ CustomerAppointment _$CustomerAppointmentFromJson(Map<String, dynamic> json) =>
       ratecomment2: json['ratecomment2'] as String?,
     );
 
-Map<String, dynamic> _$CustomerAppointmentToJson(
-        CustomerAppointment instance) =>
+Map<String, dynamic> _$CareAppointmentToJson(CareAppointment instance) =>
     <String, dynamic>{
       'apptid': instance.apptid,
       'createdatetime': instance.createdatetime,
