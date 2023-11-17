@@ -10,11 +10,9 @@ NewCaretakerResponse _$NewCaretakerResponseFromJson(
         Map<String, dynamic> json) =>
     NewCaretakerResponse(
       status: json['status'] as bool,
-      careData: json['data'] == []
-          ? []
-          : (json['data'] as List<dynamic>)
-              .map((e) => NewCaretaker.fromJson(e as Map<String, dynamic>))
-              .toList(),
+      careData: (json['data'] as List<dynamic>)
+          .map((e) => NewCaretaker.fromJson(e as Map<String, dynamic>))
+          .toList(),
       code: json['code'] as String,
       message: json['message'] as String,
     );
@@ -62,7 +60,7 @@ NewCaretaker _$NewCaretakerFromJson(Map<String, dynamic> json) => NewCaretaker(
 
 Map<String, dynamic> _$NewCaretakerToJson(NewCaretaker instance) =>
     <String, dynamic>{
-      'entryId': instance.entryid,
+      'entryid': instance.entryid,
       'userid': instance.userid,
       'entrydatetime': instance.entrydatetime,
       'qualification': instance.qualification,

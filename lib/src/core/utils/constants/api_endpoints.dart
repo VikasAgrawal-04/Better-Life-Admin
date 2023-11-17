@@ -8,4 +8,7 @@ class EndPoints {
   static const String rejectCaretakers = '/reject-caretaker';
   static const String caretakerDetails = '/get-caretaker';
   static const String allAppointments = '/all-todays-appointments';
+
+  //Users
+  static const String customers = '/customers';
 }
