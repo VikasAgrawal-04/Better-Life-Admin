@@ -3,7 +3,7 @@ import 'package:better_life_admin/services/api/repo_impl/care_repo_impl.dart';
 import 'package:better_life_admin/src/core/utils/dialog/dialog.dart';
 import 'package:better_life_admin/src/core/utils/helpers/status_handler.dart';
 import 'package:better_life_admin/src/models/response/new_caretaker_response.dart';
-import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/new_appointments.dart';
+import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/all_appointments.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/new_care_requests.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/reports/reports_dash_page.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/users/user_dash_page.dart';
@@ -15,8 +15,23 @@ class DashboardController extends GetxController {
   final status = Status.initial.obs;
   RxInt selectedIndex = 0.obs;
   final tabs = const ['Appointments', 'Requests', 'Users', 'Reports'];
+  final apptDropdown = <DropdownMenuItem>[
+    DropdownMenuItem(
+      value: "Today's Appointments",
+      child: Text("Today's Appointments"),
+    ),
+    DropdownMenuItem(
+      value: "Upcoming Appointments",
+      child: Text("Upcoming Appointments"),
+    ),
+    DropdownMenuItem(
+      value: "Past Appointments",
+      child: Text("Past Appointments"),
+    )
+  ];
+  final dropValue = "Today's Appointments".obs;
   final dashScreen = const [
-    NewAppointments(),
+    AllAppointment(),
     NewCareRequests(),
     UserDashPage(),
     ReportsDashPage()
