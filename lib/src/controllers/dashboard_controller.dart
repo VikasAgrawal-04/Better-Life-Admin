@@ -5,7 +5,7 @@ import 'package:better_life_admin/src/core/utils/helpers/status_handler.dart';
 import 'package:better_life_admin/src/models/response/new_caretaker_response.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/new_appointments.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/new_care_requests.dart';
-import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/reports_dash_page.dart';
+import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/reports/reports_dash_page.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/users/user_dash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

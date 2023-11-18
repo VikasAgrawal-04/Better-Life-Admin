@@ -10,4 +10,8 @@ class AppRoutes {
   //Users
   static const String verifiedCaretakers = '/verifiedCaretakers';
   static const String verifiedCustomer = '/verifiedUsers';
+
+  //Reports
+  static const String caretakerReports = '/caretakerReports';
+  static const String salesReports = '/salesReports';
 }

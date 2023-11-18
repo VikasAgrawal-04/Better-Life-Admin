@@ -86,14 +86,14 @@ class _VerfiedCaretakerPageState extends State<VerifiedCaretakerPage> {
                             Expanded(
                                 child: CustomButton(
                               height: 3.5.h,
-                              text: 'Accept',
+                              text: 'Deactivate',
                               onPressed: () async {},
                             )),
                             SizedBox(width: 4.w),
                             Expanded(
                                 child: CustomButton(
                               height: 3.5.h,
-                              text: 'Reject',
+                              text: 'Delete',
                               onPressed: () async {},
                             )),
                           ],
