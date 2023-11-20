@@ -85,7 +85,16 @@ class DashboardController extends GetxController {
     });
   }
 
-  Future<void> rfh() async {}
+  Future<void> rfh() async {
+    switch (selectedIndex.value) {
+      case 0:
+        fetchAppt();
+        break;
+      case 1:
+        fetchNewCaretaker();
+        break;
+    }
+  }
 
   Future<void> actionOnApplication(
       {bool reject = false, required int caretakerId}) async {

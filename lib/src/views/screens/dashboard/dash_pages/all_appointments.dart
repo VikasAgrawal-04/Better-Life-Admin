@@ -34,11 +34,11 @@ class _AllAppointmentState extends State<AllAppointment> {
           items: dashController.apptDropdown,
           onChanged: dashController.changeDropDown,
         ),
-        Gap(20),
+        const Gap(20),
         Obx(
           () => Expanded(
             child: MySliverList(
-                title: 'Upcoming Appointments',
+                title: dashController.dropValue.value,
                 status: dashController.status.value,
                 itemBuilder: (contex, index) {
                   final appt = dashController.apptList[index];
@@ -53,36 +53,37 @@ class _AllAppointmentState extends State<AllAppointment> {
                       ),
                     ),
                     child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                Helpers.dateFormat(appt.createdatetime),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(fontWeight: FontWeight.w700),
-                              ),
-                              Text(
-                                Helpers.timeFormat(appt.createdatetime),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
-                          const Gap(5),
-                          Text(appt.patientname),
-                          const Gap(5),
-                          Text(appt.pickaddress),
-                          const Gap(5),
-                          Text('Hospital : ${appt.hospital}'),
-                          const Gap(5),
-                          Text('Caretaker : ${appt.doctor}')
-                        ]),
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              Helpers.dateFormat(appt.createdatetime),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(fontWeight: FontWeight.w700),
+                            ),
+                            Text(
+                              Helpers.timeFormat(appt.createdatetime),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
+                        const Gap(5),
+                        Text(appt.patientname),
+                        const Gap(5),
+                        Text(appt.pickaddress),
+                        const Gap(5),
+                        Text('Hospital : ${appt.hospital}'),
+                        const Gap(5),
+                        Text('Caretaker : ${appt.doctor}')
+                      ],
+                    ),
                   );
                 },
                 list: dashController.apptList),

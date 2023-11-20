@@ -24,6 +24,7 @@ class _DashboardState extends State<Dashboard> {
       key: key,
       appBar: const MyAppBar(
         title: Text('Better-Life Admin'),
+        leading: Icon(Icons.menu),
       ),
       bottomNavigationBar: _buttonAndTabbar(dashboardController),
       body: Padding(
