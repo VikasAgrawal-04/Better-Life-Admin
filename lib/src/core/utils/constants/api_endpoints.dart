@@ -23,6 +23,6 @@ class EndPoints {
   //Appointment
   static const String upcomingAppt = '/all-upcoming-appointments';
   static const String pastAppt = '/all-past-appointments';
-  static const String todayAppt = 'i/all-todays-appointments';
+  static const String todayAppt = '/all-todays-appointments';
   static const String apptDetails = '/get-appointment';
 }

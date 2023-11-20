@@ -13,6 +13,8 @@ enum RequestType { get, post, put, delete }
 
 enum LoggerType { d, e, i, f, t, w }
 
+enum ApptType { today, upcoming, past }
+
 class Helpers {
   static SharedPreferences? prefs;
   static Dio? dio;

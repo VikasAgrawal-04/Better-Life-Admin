@@ -1,7 +1,11 @@
+import 'package:better_life_admin/services/api/repo/appt_repo.dart';
 import 'package:better_life_admin/services/api/repo/care_repo.dart';
+import 'package:better_life_admin/services/api/repo_impl/appt_repo_impl.dart';
 import 'package:better_life_admin/services/api/repo_impl/care_repo_impl.dart';
 import 'package:better_life_admin/src/core/utils/dialog/dialog.dart';
+import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
 import 'package:better_life_admin/src/core/utils/helpers/status_handler.dart';
+import 'package:better_life_admin/src/models/response/appt_response_model.dart';
 import 'package:better_life_admin/src/models/response/new_caretaker_response.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/all_appointments.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/new_care_requests.dart';
@@ -12,10 +16,11 @@ import 'package:get/get.dart';
 
 class DashboardController extends GetxController {
   final CareRepo _repo = CareRepoImpl();
+  final ApptRepo _apptRepo = ApptRepoImpl();
   final status = Status.initial.obs;
   RxInt selectedIndex = 0.obs;
   final tabs = const ['Appointments', 'Requests', 'Users', 'Reports'];
-  final apptDropdown = <DropdownMenuItem>[
+  final apptDropdown = const <DropdownMenuItem>[
     DropdownMenuItem(
       value: "Today's Appointments",
       child: Text("Today's Appointments"),
@@ -37,8 +42,29 @@ class DashboardController extends GetxController {
     ReportsDashPage()
   ];
 
+  ApptType getApptTypeFromDropValue() {
+    switch (dropValue.value) {
+      case "Today's Appointments":
+        return ApptType.today;
+      case "Upcoming Appointments":
+        return ApptType.upcoming;
+      case "Past Appointments":
+        return ApptType.past;
+      default:
+        throw ArgumentError('Invalid dropValue: $dropValue');
+    }
+  }
+
+  ApptType get apptType => getApptTypeFromDropValue();
+
+  void changeDropDown(value) {
+    dropValue.value = value;
+    fetchAppt();
+  }
+
   //API LISTS
-  final newCareLists = <NewCaretaker>[];
+  final newCareLists = <NewCaretaker>[].obs;
+  final apptList = <ApptData>[].obs;
 
   get currentPage => dashScreen[selectedIndex.value];
 
@@ -72,6 +98,23 @@ class DashboardController extends GetxController {
         fetchNewCaretaker();
         Get.back();
       });
+    });
+  }
+
+  Future<void> fetchAppt() async {
+    apptList.clear();
+    status.value = Status.loading;
+    final result = await _apptRepo.fetchAppt(apptType);
+    result.fold((l) {
+      status.value = Status.error;
+      debugPrint('Failure In Caretaker $l');
+    }, (r) {
+      if (r.apptData.isEmpty) {
+        status.value = Status.empty;
+      } else {
+        status.value = Status.success;
+      }
+      apptList.addAll(r.apptData);
     });
   }
 }
