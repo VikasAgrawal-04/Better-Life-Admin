@@ -2,7 +2,7 @@ import 'package:better_life_admin/services/routing/routes.dart';
 import 'package:better_life_admin/src/middlewares/auth_guard.dart';
 import 'package:better_life_admin/src/views/screens/auth/login.dart';
 import 'package:better_life_admin/src/views/screens/auth/register.dart';
-import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/reports/caretaker_individual_reports.dart';
+import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/reports/caretaker_individual_lists.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/reports/sales_report.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/users/caretakers_page.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/users/customers_page.dart';

@@ -9,11 +9,9 @@ part of 'appt_response_model.dart';
 ApptResponseModel _$ApptResponseModelFromJson(Map<String, dynamic> json) =>
     ApptResponseModel(
       status: json['status'] as bool,
-      apptData: json['data'] == []
-          ? []
-          : (json['data'] as List<dynamic>)
-              .map((e) => ApptData.fromJson(e as Map<String, dynamic>))
-              .toList(),
+      apptData: (json['data'] as List<dynamic>)
+          .map((e) => ApptData.fromJson(e as Map<String, dynamic>))
+          .toList(),
       code: json['code'] as String,
       message: json['message'] as String,
     );

@@ -158,4 +158,8 @@ class Helpers {
   static String timeFormat(String dateTime) {
     return DateFormat('hh:mm a').format(DateTime.parse(dateTime));
   }
+
+  static String apiDateFormat(DateTime date) {
+    return DateFormat('yyyy/MM/dd').format(date);
+  }
 }

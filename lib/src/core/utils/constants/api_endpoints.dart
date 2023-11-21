@@ -25,4 +25,9 @@ class EndPoints {
   static const String pastAppt = '/all-past-appointments';
   static const String todayAppt = '/all-todays-appointments';
   static const String apptDetails = '/get-appointment';
+
+  //Reports
+  static const String salesReport = '/getSalesReport';
+  static const String caretakerReport = '/getCaretakerReport';
+  static const String caretakerList = '/getCaretakerList';
 }
