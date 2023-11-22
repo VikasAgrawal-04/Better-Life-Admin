@@ -64,7 +64,7 @@ class _VerfiedCaretakerPageState extends State<VerifiedCaretakerPage> {
                             Text('Phone: ${caretaker.mobile}'),
                             IconButton(
                               padding: EdgeInsets.zero,
-                              constraints: BoxConstraints(),
+                              constraints: const BoxConstraints(),
                               onPressed: () {
                                 Helpers.makeCall(caretaker.mobile);
                               },
@@ -87,14 +87,20 @@ class _VerfiedCaretakerPageState extends State<VerifiedCaretakerPage> {
                                 child: CustomButton(
                               height: 3.5.h,
                               text: 'Deactivate',
-                              onPressed: () async {},
+                              onPressed: () async {
+                                await userControl.actionCaretaker(
+                                    Axn.deactivate, caretaker.userid);
+                              },
                             )),
                             SizedBox(width: 4.w),
                             Expanded(
                                 child: CustomButton(
                               height: 3.5.h,
                               text: 'Delete',
-                              onPressed: () async {},
+                              onPressed: () async {
+                                await userControl.actionCaretaker(
+                                    Axn.delete, caretaker.userid);
+                              },
                             )),
                           ],
                         )

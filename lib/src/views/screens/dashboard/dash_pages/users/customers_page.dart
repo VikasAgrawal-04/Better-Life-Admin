@@ -2,6 +2,7 @@ import 'package:better_life_admin/src/controllers/user_controller.dart';
 import 'package:better_life_admin/src/core/utils/constants/constants.dart';
 import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
 import 'package:better_life_admin/src/models/response/verified_customer_response_model.dart';
+import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/users/customer_details.dart';
 import 'package:better_life_admin/src/views/widgets/buttons/custom_button.dart';
 import 'package:better_life_admin/src/views/widgets/global/my_appbar.dart';
 import 'package:better_life_admin/src/views/widgets/sliver_list/my_sliver_list.dart';
@@ -80,21 +81,32 @@ class _VerifiedCustomerPageState extends State<VerifiedCustomerPage> {
                               child: CustomButton(
                             height: 3.5.h,
                             text: 'View',
-                            onPressed: () async {},
+                            onPressed: () async {
+                              await userController
+                                  .fetchCustomerDetail(customer.userid);
+                              Get.to(const CustomerDetails(),
+                                  transition: Transition.rightToLeft);
+                            },
                           )),
                           SizedBox(width: 4.w),
                           Expanded(
                               child: CustomButton(
                             height: 3.5.h,
                             text: 'Deactivate',
-                            onPressed: () async {},
+                            onPressed: () async {
+                              await userController.actionCustomer(
+                                  Axn.deactivate, customer.userid);
+                            },
                           )),
                           SizedBox(width: 4.w),
                           Expanded(
                               child: CustomButton(
                             height: 3.5.h,
                             text: 'Delete',
-                            onPressed: () async {},
+                            onPressed: () async {
+                              await userController.actionCustomer(
+                                  Axn.delete, customer.userid);
+                            },
                           )),
                         ],
                       )

@@ -15,6 +15,8 @@ enum LoggerType { d, e, i, f, t, w }
 
 enum ApptType { today, upcoming, past }
 
+enum Axn { active, deactivate, delete }
+
 class Helpers {
   static SharedPreferences? prefs;
   static Dio? dio;
