@@ -2,12 +2,11 @@ import 'package:better_life_admin/src/controllers/report_controller.dart';
 import 'package:better_life_admin/src/core/utils/constants/constants.dart';
 import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
 import 'package:better_life_admin/src/core/utils/helpers/status_handler.dart';
-import 'package:better_life_admin/src/models/response/bar_chart_model.dart';
 import 'package:better_life_admin/src/views/widgets/global/my_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class CaretakerIndividualReports extends StatefulWidget {
@@ -41,34 +40,37 @@ class _CaretakerIndividualReportsState
           IconButton.outlined(
               onPressed: () {
                 Get.defaultDialog(
+                    title: 'Select Date Range',
                     content: IntrinsicHeight(
-                  child: SizedBox(
-                    height: 40.h,
-                    width: 100.w,
-                    child: SfDateRangePicker(
-                      headerStyle: const DateRangePickerHeaderStyle(
-                          textAlign: TextAlign.center),
-                      selectionMode:
-                          DateRangePickerSelectionMode.extendableRange,
-                      showActionButtons: true,
-                      onCancel: () => Get.back(),
-                      onSubmit: (date) {
-                        if (date != null) {
-                          if (date is PickerDateRange) {
-                            reportController.fetchCareReports(
-                                fromDate:
-                                    Helpers.apiDateFormat(date.startDate!),
-                                toDate: Helpers.apiDateFormat(date.endDate!),
-                                caretakerId: id);
-                          }
-                        } else {
-                          reportController.fetchCareReports(caretakerId: id);
-                        }
-                        Get.back();
-                      },
-                    ),
-                  ),
-                ));
+                      child: SizedBox(
+                        height: 40.h,
+                        width: 100.w,
+                        child: SfDateRangePicker(
+                          headerStyle: const DateRangePickerHeaderStyle(
+                              textAlign: TextAlign.center),
+                          selectionMode:
+                              DateRangePickerSelectionMode.extendableRange,
+                          showActionButtons: true,
+                          onCancel: () => Get.back(),
+                          onSubmit: (date) {
+                            if (date != null) {
+                              if (date is PickerDateRange) {
+                                reportController.fetchCareReports(
+                                    fromDate:
+                                        Helpers.apiDateFormat(date.startDate!),
+                                    toDate:
+                                        Helpers.apiDateFormat(date.endDate!),
+                                    caretakerId: id);
+                              }
+                            } else {
+                              reportController.fetchCareReports(
+                                  caretakerId: id);
+                            }
+                            Get.back();
+                          },
+                        ),
+                      ),
+                    ));
               },
               icon: const Icon(Icons.filter_alt_outlined))
         ],
@@ -76,22 +78,42 @@ class _CaretakerIndividualReportsState
       body: Padding(
         padding: kPadding,
         child: Obx(() => StatusHandler(
-              status: reportController.caretakerStatus.value,
-              onSuccess: SfCartesianChart(
-                isTransposed: true,
-                tooltipBehavior: TooltipBehavior(enable: true),
-                series: <ChartSeries>[
-                  BarSeries<BarChartData, String>(
-                      dataSource: reportController.caretakerReport,
-                      xValueMapper: (BarChartData data, _) => data.label,
-                      yValueMapper: (BarChartData data, _) => data.value,
-                      dataLabelSettings:
-                          const DataLabelSettings(isVisible: true),
-                      enableTooltip: true)
-                ],
-                primaryXAxis: CategoryAxis(),
-              ),
-            )),
+            status: reportController.caretakerStatus.value,
+            onSuccess: ListView.builder(
+                shrinkWrap: true,
+                itemCount: reportController.caretakerReport.length,
+                itemBuilder: (context, index) {
+                  final report = reportController.caretakerReport[index];
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 1.h),
+                    child: Container(
+                      padding: kPadding,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: Colors.grey.withOpacity(0.3),
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          Text('Date: ${report.label}'),
+                          const Gap(20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                  'Total Appointments: ${report.value2.toInt()}',
+                                  style: Get.textTheme.bodyLarge),
+                              Text('Total Amount: ${report.value}',
+                                  style: Get.textTheme.bodyLarge)
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                }))),
       ),
     );
   }

@@ -35,7 +35,9 @@ class ReportController extends GetxController {
       }
       for (final data in r.reportData) {
         salesReport.add(BarChartData(
-            label: data.visitdate, value: double.parse(data.totalAmount)));
+            label: data.visitdate,
+            value: double.parse(data.totalAmount),
+            value2: data.customerCount?.toDouble() ?? 0.0));
       }
     });
   }
@@ -65,7 +67,6 @@ class ReportController extends GetxController {
     final result = await _repo.fetchCareReports(
         caretakerId: caretakerId, fromDate: fromDate, toDate: toDate);
     result.fold((l) {
-      print('objeect ${l.toString() == 'No Data Found!'}');
       if (l.toString() == 'No Data Found!') {
         caretakerStatus.value = Status.empty;
       } else {
@@ -79,7 +80,9 @@ class ReportController extends GetxController {
       }
       for (final data in r.reportData) {
         caretakerReport.add(BarChartData(
-            label: data.visitdate, value: double.parse(data.totalAmount)));
+            label: data.visitdate,
+            value: double.parse(data.totalAmount),
+            value2: data.apptCount.toDouble()));
       }
     });
   }

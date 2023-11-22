@@ -37,33 +37,35 @@ class _SalesReportState extends State<SalesReport> {
           IconButton.outlined(
               onPressed: () {
                 Get.defaultDialog(
+                    title: 'Select Date Range',
                     content: IntrinsicHeight(
-                  child: SizedBox(
-                    height: 40.h,
-                    width: 100.w,
-                    child: SfDateRangePicker(
-                      headerStyle: const DateRangePickerHeaderStyle(
-                          textAlign: TextAlign.center),
-                      selectionMode:
-                          DateRangePickerSelectionMode.extendableRange,
-                      showActionButtons: true,
-                      onCancel: () => Get.back(),
-                      onSubmit: (date) {
-                        if (date != null) {
-                          if (date is PickerDateRange) {
-                            reportController.fetchSalesReports(
-                                fromDate:
-                                    Helpers.apiDateFormat(date.startDate!),
-                                toDate: Helpers.apiDateFormat(date.endDate!));
-                          }
-                        } else {
-                          reportController.fetchSalesReports();
-                        }
-                        Get.back();
-                      },
-                    ),
-                  ),
-                ));
+                      child: SizedBox(
+                        height: 40.h,
+                        width: 100.w,
+                        child: SfDateRangePicker(
+                          headerStyle: const DateRangePickerHeaderStyle(
+                              textAlign: TextAlign.center),
+                          selectionMode:
+                              DateRangePickerSelectionMode.extendableRange,
+                          showActionButtons: true,
+                          onCancel: () => Get.back(),
+                          onSubmit: (date) {
+                            if (date != null) {
+                              if (date is PickerDateRange) {
+                                reportController.fetchSalesReports(
+                                    fromDate:
+                                        Helpers.apiDateFormat(date.startDate!),
+                                    toDate:
+                                        Helpers.apiDateFormat(date.endDate!));
+                              }
+                            } else {
+                              reportController.fetchSalesReports();
+                            }
+                            Get.back();
+                          },
+                        ),
+                      ),
+                    ));
               },
               icon: const Icon(Icons.filter_alt_outlined))
         ],
@@ -71,22 +73,36 @@ class _SalesReportState extends State<SalesReport> {
       body: Padding(
         padding: kPadding,
         child: Obx(() => StatusHandler(
-          status: reportController.status.value,
-          onSuccess: SfCartesianChart(
-            isTransposed: true,
-            tooltipBehavior: TooltipBehavior(enable: true),
-            series: <ChartSeries>[
-              BarSeries<BarChartData, String>(
-                  dataSource: reportController.salesReport,
-                  xValueMapper: (BarChartData data, _) => data.label,
-                  yValueMapper: (BarChartData data, _) => data.value,
-                  dataLabelSettings:
-                      const DataLabelSettings(isVisible: true),
-                  enableTooltip: true)
-            ],
-            primaryXAxis: CategoryAxis(),
-          ),
-        )),
+              status: reportController.status.value,
+              onSuccess: SfCartesianChart(
+                isTransposed: true,
+                tooltipBehavior: TooltipBehavior(enable: true),
+                legend: const Legend(isVisible: true),
+                series: <ChartSeries>[
+                  BarSeries<BarChartData, String>(
+                      name: 'Amount',
+                      xAxisName: 'Date',
+                      yAxisName: 'Amount',
+                      dataSource: reportController.salesReport,
+                      xValueMapper: (BarChartData data, _) => data.label,
+                      yValueMapper: (BarChartData data, _) => data.value,
+                      dataLabelSettings:
+                          const DataLabelSettings(isVisible: true),
+                      enableTooltip: true),
+                  BarSeries<BarChartData, String>(
+                      name: 'Customers',
+                      xAxisName: 'Date',
+                      yAxisName: 'Customers',
+                      dataSource: reportController.salesReport,
+                      xValueMapper: (BarChartData data, _) => data.label,
+                      yValueMapper: (BarChartData data, _) => data.value2,
+                      dataLabelSettings:
+                          const DataLabelSettings(isVisible: true),
+                      enableTooltip: true),
+                ],
+                primaryXAxis: CategoryAxis(),
+              ),
+            )),
       ),
     );
   }
