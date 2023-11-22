@@ -1,6 +1,5 @@
 import 'package:better_life_admin/src/controllers/user_controller.dart';
 import 'package:better_life_admin/src/core/utils/constants/constants.dart';
-import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
 import 'package:better_life_admin/src/views/widgets/global/my_appbar.dart';
 import 'package:better_life_admin/src/views/widgets/sliver_list/my_sliver_list.dart';
 import 'package:flutter/material.dart';
@@ -43,14 +42,14 @@ class CaretakerDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          Helpers.dateFormat(appt.entrydatetime),
+                          appt.visitdate,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium
                               ?.copyWith(fontWeight: FontWeight.w700),
                         ),
                         Text(
-                          Helpers.timeFormat(appt.entrydatetime),
+                          appt.pickuptime,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium

@@ -37,7 +37,7 @@ class _VerfiedCaretakerPageState extends State<VerifiedCaretakerPage> {
         padding: kPadding,
         child: RefreshIndicator(
             child: Obx(() => MySliverList(
-                title: 'CareTakers',
+                title: 'Cartakers',
                 status: userControl.status.value,
                 itemBuilder: (context, index) {
                   final caretaker = userControl.caretakerLists[index];

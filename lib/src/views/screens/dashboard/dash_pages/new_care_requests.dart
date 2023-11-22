@@ -29,7 +29,7 @@ class _NewCareRequestsState extends State<NewCareRequests> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => MySliverList(
-        title: 'NEW CARETAKER REQUESTS',
+        title: 'New Caretaker Requests',
         status: dashboardController.status.value,
         list: dashboardController.newCareLists,
         itemBuilder: (context, index) {
