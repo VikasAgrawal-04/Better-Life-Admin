@@ -3,6 +3,7 @@ import 'package:better_life_admin/src/core/error/exception.dart';
 import 'package:better_life_admin/src/core/error/failures.dart';
 import 'package:better_life_admin/src/core/utils/constants/api_endpoints.dart';
 import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
+import 'package:better_life_admin/src/models/response/caretaker_detail_response_model.dart';
 import 'package:better_life_admin/src/models/response/customer_detail_response_model.dart';
 import 'package:better_life_admin/src/models/response/verified_caretaker_response_model.dart';
 import 'package:better_life_admin/src/models/response/verified_customer_response_model.dart';
@@ -116,6 +117,25 @@ class UserRepoImpl implements UserRepo {
         return Left(ServerFailure(message: response?['message']));
       }
       return Right(CustomerDetailResponseModel.fromJson(response ?? {}));
+    } on ServerException catch (error, s) {
+      debugPrintStack(stackTrace: s);
+      return Left(ServerFailure(message: error.message.toString()));
+    } catch (e, s) {
+      debugPrintStack(stackTrace: s);
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CaretakerDetailsModel>> fetchCaretakerDetail(
+      int careId) async {
+    try {
+      final response = await Helpers.sendRequest(
+          RequestType.put, '${EndPoints.caretakerDetails}/$careId');
+      if (response?['code'] != '200') {
+        return Left(ServerFailure(message: response?['message']));
+      }
+      return Right(CaretakerDetailsModel.fromJson(response ?? {}));
     } on ServerException catch (error, s) {
       debugPrintStack(stackTrace: s);
       return Left(ServerFailure(message: error.message.toString()));

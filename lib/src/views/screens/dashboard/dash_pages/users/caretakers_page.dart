@@ -1,6 +1,7 @@
 import 'package:better_life_admin/src/controllers/user_controller.dart';
 import 'package:better_life_admin/src/core/utils/constants/constants.dart';
 import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
+import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/users/caretaker_details.dart';
 import 'package:better_life_admin/src/views/widgets/buttons/custom_button.dart';
 import 'package:better_life_admin/src/views/widgets/global/my_appbar.dart';
 import 'package:better_life_admin/src/views/widgets/sliver_list/my_sliver_list.dart';
@@ -80,7 +81,12 @@ class _VerfiedCaretakerPageState extends State<VerifiedCaretakerPage> {
                                 child: CustomButton(
                               height: 3.5.h,
                               text: 'View',
-                              onPressed: () async {},
+                              onPressed: () async {
+                                await userControl
+                                    .fetchCaretakerDetail(caretaker.userid);
+                                Get.to(const CaretakerDetails(),
+                                    transition: Transition.rightToLeft);
+                              },
                             )),
                             SizedBox(width: 4.w),
                             Expanded(

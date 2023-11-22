@@ -1,5 +1,6 @@
 import 'package:better_life_admin/src/core/error/failures.dart';
 import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
+import 'package:better_life_admin/src/models/response/caretaker_detail_response_model.dart';
 import 'package:better_life_admin/src/models/response/customer_detail_response_model.dart';
 import 'package:better_life_admin/src/models/response/verified_caretaker_response_model.dart';
 import 'package:better_life_admin/src/models/response/verified_customer_response_model.dart';
@@ -14,4 +15,6 @@ abstract class UserRepo {
       Axn action, int cusId);
   Future<Either<Failure, CustomerDetailResponseModel>> fetchCustomerDetail(
       int cusId);
+  Future<Either<Failure, CaretakerDetailsModel>> fetchCaretakerDetail(
+      int careId);
 }

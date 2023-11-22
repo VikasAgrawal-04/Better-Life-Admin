@@ -12,7 +12,7 @@ class EndPoints {
   static const String customers = '/customers';
   static const String caretaker = '/caretakers';
   static const String customerDetails = '/get-customer';
-  static const String caretakeerDetails = '/get-caretaker';
+  static const String caretakerDetails = '/get-caretaker';
   static const String deactiveCustomer = '/deactive-customer';
   static const String activateCustomer = '/active-customer';
   static const String deleteCustomer = '/delete-customer';

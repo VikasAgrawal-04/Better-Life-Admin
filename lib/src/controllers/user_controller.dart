@@ -3,6 +3,7 @@ import 'package:better_life_admin/services/api/repo_impl/user_repo_impl.dart';
 import 'package:better_life_admin/src/core/utils/dialog/dialog.dart';
 import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
 import 'package:better_life_admin/src/core/utils/helpers/status_handler.dart';
+import 'package:better_life_admin/src/models/response/caretaker_detail_response_model.dart';
 import 'package:better_life_admin/src/models/response/customer_detail_response_model.dart';
 import 'package:better_life_admin/src/models/response/verified_caretaker_response_model.dart';
 import 'package:better_life_admin/src/models/response/verified_customer_response_model.dart';
@@ -18,6 +19,7 @@ class UserController extends GetxController {
   final customerLists = <VerifiedCustomers>[].obs;
   final caretakerLists = <VerifiedCaretaker>[].obs;
   final customerAppt = <Appointment>[].obs;
+  final careAppt = <CaretakerAppointment>[].obs;
 
   Future<void> fetchVerifiedCustomers() async {
     status.value = Status.loading;
@@ -85,6 +87,23 @@ class UserController extends GetxController {
         detailStatus.value = Status.empty;
       } else {
         customerAppt.addAll(r.appt);
+        detailStatus.value = Status.success;
+      }
+    });
+  }
+
+  Future<void> fetchCaretakerDetail(int careId) async {
+    detailStatus.value = Status.loading;
+    final result = await _repo.fetchCaretakerDetail(careId);
+    result.fold((l) {
+      detailStatus.value = Status.error;
+      debugPrint("Failure In fetchCustomerDetail $l");
+    }, (r) {
+      careAppt.clear();
+      if (r.appt.isEmpty) {
+        detailStatus.value = Status.empty;
+      } else {
+        careAppt.addAll(r.appt);
         detailStatus.value = Status.success;
       }
     });

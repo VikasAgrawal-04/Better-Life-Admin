@@ -22,7 +22,7 @@ class CustomerDetailResponseModel {
 }
 
 @JsonSerializable()
-class Appointment {
+  class Appointment {
   int apptid;
   String createdatetime;
   int customerid;
