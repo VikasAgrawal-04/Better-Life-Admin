@@ -55,6 +55,10 @@ class NewCaretaker {
   final String isotpverified;
   @JsonKey(name: 'firebase_device_token')
   final String fcm;
+  @JsonKey(name: 'caretaker_language')
+  final List caretakerLang;
+  @JsonKey(name: 'caretaker_pincode')
+  final List caretakerPincode;
 
   NewCaretaker(
       {required this.entryid,
@@ -85,7 +89,9 @@ class NewCaretaker {
       required this.OTP,
       required this.createdatetime,
       required this.isotpverified,
-      required this.fcm});
+      required this.fcm,
+      required this.caretakerLang,
+      required this.caretakerPincode});
 
   factory NewCaretaker.fromJson(Map<String, dynamic> json) =>
       _$NewCaretakerFromJson(json);

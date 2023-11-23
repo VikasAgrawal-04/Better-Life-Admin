@@ -1,6 +1,7 @@
 import 'package:better_life_admin/src/controllers/dashboard_controller.dart';
 import 'package:better_life_admin/src/core/utils/constants/constants.dart';
 import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
+import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/users/new_caretaker/new_caretaker_details.dart';
 import 'package:better_life_admin/src/views/widgets/buttons/custom_button.dart';
 import 'package:better_life_admin/src/views/widgets/sliver_list/my_sliver_list.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +92,19 @@ class _NewCareRequestsState extends State<NewCareRequests> {
                         child: CustomButton(
                       height: 5.h,
                       text: 'View',
-                      onPressed: () async {},
+                      onPressed: () async {
+                        Get.to(NewCaretakerDetails(
+                          data: caretaker,
+                          onSuccess: () async {
+                            await dashboardController.actionOnApplication(
+                                caretakerId: caretaker.userid);
+                          },
+                          onReject: () async {
+                            await dashboardController.actionOnApplication(
+                                caretakerId: caretaker.userid, reject: true);
+                          },
+                        ));
+                      },
                     )),
                     SizedBox(width: 4.w),
                     Expanded(

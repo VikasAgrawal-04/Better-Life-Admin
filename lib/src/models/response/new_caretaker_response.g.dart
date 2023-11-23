@@ -56,6 +56,8 @@ NewCaretaker _$NewCaretakerFromJson(Map<String, dynamic> json) => NewCaretaker(
       createdatetime: json['createdatetime'] as String,
       isotpverified: json['isotpverified'] as String,
       fcm: json['firebase_device_token'] as String,
+      caretakerLang: json['caretaker_language'] as List<dynamic>,
+      caretakerPincode: json['caretaker_pincode'] as List<dynamic>,
     );
 
 Map<String, dynamic> _$NewCaretakerToJson(NewCaretaker instance) =>
@@ -89,4 +91,6 @@ Map<String, dynamic> _$NewCaretakerToJson(NewCaretaker instance) =>
       'createdatetime': instance.createdatetime,
       'isotpverified': instance.isotpverified,
       'firebase_device_token': instance.fcm,
+      'caretaker_language': instance.caretakerLang,
+      'caretaker_pincode': instance.caretakerPincode,
     };
