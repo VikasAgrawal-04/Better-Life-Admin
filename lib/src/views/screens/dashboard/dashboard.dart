@@ -1,5 +1,7 @@
+import 'package:better_life_admin/services/routing/routes.dart';
 import 'package:better_life_admin/src/controllers/dashboard_controller.dart';
 import 'package:better_life_admin/src/core/utils/constants/constants.dart';
+import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
 import 'package:better_life_admin/src/views/widgets/global/my_appbar.dart';
 import 'package:better_life_admin/src/views/widgets/tabbar/home_tabbar.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +24,17 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: key,
-      appBar: const MyAppBar(
-        title: Text('Better-Life Admin'),
-        leading: Icon(Icons.menu),
+      appBar: MyAppBar(
+        title: const Text('Better-Life Admin'),
+        showBackButton: false,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Helpers.clearShared();
+                Get.offAllNamed(AppRoutes.splash);
+              },
+              icon: const Icon(Icons.logout))
+        ],
       ),
       bottomNavigationBar: _buttonAndTabbar(dashboardController),
       body: Padding(
