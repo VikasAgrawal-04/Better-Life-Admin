@@ -144,4 +144,43 @@ class UserRepoImpl implements UserRepo {
       return Left(ServerFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, VerifiedCaretakerModel>>
+      fetchDeactivatedCaretaker() async {
+    try {
+      final response = await Helpers.sendRequest(
+          RequestType.post, EndPoints.deactivedCaretakers,
+          queryParams: {});
+      if (response?['code'] != '200') {
+        return Left(ServerFailure(message: response?['message']));
+      }
+      return Right(VerifiedCaretakerModel.fromJson(response ?? {}));
+    } on ServerException catch (error, s) {
+      debugPrintStack(stackTrace: s);
+      return Left(ServerFailure(message: error.message.toString()));
+    } catch (e, s) {
+      debugPrintStack(stackTrace: s);
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, VerifiedCaretakerModel>>
+      fetchDeletedCaretaker() async {
+    try {
+      final response = await Helpers.sendRequest(
+          RequestType.put, EndPoints.rejectedCaretakers);
+      if (response?['code'] != '200') {
+        return Left(ServerFailure(message: response?['message']));
+      }
+      return Right(VerifiedCaretakerModel.fromJson(response ?? {}));
+    } on ServerException catch (error, s) {
+      debugPrintStack(stackTrace: s);
+      return Left(ServerFailure(message: error.message.toString()));
+    } catch (e, s) {
+      debugPrintStack(stackTrace: s);
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
 }

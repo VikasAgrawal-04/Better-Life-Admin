@@ -9,6 +9,8 @@ import 'package:dartz/dartz.dart';
 abstract class UserRepo {
   Future<Either<Failure, VerifiedCustomerResponse>> fetchVerifiedCustomer();
   Future<Either<Failure, VerifiedCaretakerModel>> fetchVerifiedCaretaker();
+  Future<Either<Failure, VerifiedCaretakerModel>> fetchDeletedCaretaker();
+  Future<Either<Failure, VerifiedCaretakerModel>> fetchDeactivatedCaretaker();
   Future<Either<Failure, Map<String, dynamic>>> actionCaretaker(
       Axn action, int careId);
   Future<Either<Failure, Map<String, dynamic>>> actionCustomer(

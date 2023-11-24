@@ -13,11 +13,15 @@ import 'package:get/get.dart';
 class UserController extends GetxController {
   final UserRepo _repo = UserRepoImpl();
   final status = Status.initial.obs;
+  final deactiveStatus = Status.initial.obs;
+  final rejectedStatus = Status.initial.obs;
   final detailStatus = Status.initial.obs;
 
   //API Lists
   final customerLists = <VerifiedCustomers>[].obs;
   final caretakerLists = <VerifiedCaretaker>[].obs;
+  final deactivedCareList = <VerifiedCaretaker>[].obs;
+  final rejectedCareList = <VerifiedCaretaker>[].obs;
   final customerAppt = <Appointment>[].obs;
   final careAppt = <CaretakerAppointment>[].obs;
 
@@ -55,11 +59,47 @@ class UserController extends GetxController {
     });
   }
 
+  Future<void> fetchDeletedCaretaker() async {
+    rejectedStatus.value = Status.loading;
+    final result = await _repo.fetchDeletedCaretaker();
+    result.fold((l) {
+      rejectedStatus.value = Status.error;
+      debugPrint("Failure In FetchVerifiedCustomer $l");
+    }, (r) {
+      rejectedCareList.clear();
+      if (r.caretakerData.isEmpty) {
+        rejectedStatus.value = Status.empty;
+      } else {
+        rejectedCareList.addAll(r.caretakerData);
+        rejectedStatus.value = Status.success;
+      }
+    });
+  }
+
+  Future<void> fetchDeactivatedCaretaker() async {
+    deactiveStatus.value = Status.loading;
+    final result = await _repo.fetchDeactivatedCaretaker();
+    result.fold((l) {
+      deactiveStatus.value = Status.error;
+      debugPrint("Failure In FetchVerifiedCustomer $l");
+    }, (r) {
+      deactivedCareList.clear();
+      if (r.caretakerData.isEmpty) {
+        deactiveStatus.value = Status.empty;
+      } else {
+        deactivedCareList.addAll(r.caretakerData);
+        deactiveStatus.value = Status.success;
+      }
+    });
+  }
+
   Future<void> actionCaretaker(Axn action, int careId) async {
     final result = await _repo.actionCaretaker(action, careId);
     result.fold((l) => debugPrint("Failure In actionCaretaker $l"), (r) {
       Dialogs.success(r['message'], onTap: () {
         fetchVerifiedCaretaker();
+        fetchDeactivatedCaretaker();
+        fetchDeletedCaretaker();
         Get.back();
       });
     });
