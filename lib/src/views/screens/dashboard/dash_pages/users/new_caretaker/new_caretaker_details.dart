@@ -1,6 +1,7 @@
 import 'package:better_life_admin/src/core/utils/constants/constants.dart';
 import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
 import 'package:better_life_admin/src/models/response/new_caretaker_response.dart';
+import 'package:better_life_admin/src/views/widgets/buttons/custom_button.dart';
 import 'package:better_life_admin/src/views/widgets/global/header_text.dart';
 import 'package:better_life_admin/src/views/widgets/global/my_appbar.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,7 @@ class _NewCaretakerDetailsState extends State<NewCaretakerDetails> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    Helpers.dateFormat(widget.data.entrydatetime),
+                    Helpers.displayDate(widget.data.entrydatetime),
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium
@@ -101,7 +102,8 @@ class _NewCaretakerDetailsState extends State<NewCaretakerDetails> {
               const Gap(5),
               Text('Qualification : ${widget.data.qualification}'),
               const Gap(5),
-              Text('Date of Birth : ${widget.data.dateofbirth}'),
+              Text(
+                  'Date of Birth : ${Helpers.displayDate(widget.data.dateofbirth)}'),
               const Gap(5),
               Text(
                   'Languages known : ${generatCommaSeparated(widget.data.toJson(), 'caretaker_language', 'language')}'),
@@ -126,7 +128,27 @@ class _NewCaretakerDetailsState extends State<NewCaretakerDetails> {
                   pincode['pincode'],
                   style: const TextStyle(height: 1.2),
                 );
-              })
+              }),
+              const Gap(10),
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomButton(
+                      height: 4.5.h,
+                      text: 'Accept',
+                      onPressed: widget.onSuccess,
+                    ),
+                  ),
+                  SizedBox(width: 6.w),
+                  Expanded(
+                    child: CustomButton(
+                      height: 4.5.h,
+                      text: 'Reject',
+                      onPressed: widget.onReject,
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),

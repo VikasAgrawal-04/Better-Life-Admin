@@ -164,4 +164,8 @@ class Helpers {
   static String apiDateFormat(DateTime date) {
     return DateFormat('yyyy/MM/dd').format(date);
   }
+
+  static String displayDate(String date) {
+    return DateFormat('dd/MM/yyyy').format(DateTime.parse(date));
+  }
 }

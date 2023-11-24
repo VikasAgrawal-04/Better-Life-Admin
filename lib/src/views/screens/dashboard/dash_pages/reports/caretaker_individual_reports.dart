@@ -97,7 +97,7 @@ class _CaretakerIndividualReportsState
                       ),
                       child: Column(
                         children: [
-                          Text('Date: ${report.label}'),
+                          Text('Date: ${Helpers.displayDate(report.label)}'),
                           const Gap(20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -98,8 +98,8 @@ class _LoginScreenState extends State<LoginScreen> {
         const SizedBox(height: 10),
         CustomButton(
             onPressed: () async => Get.offAll<void>(
-                  () => const RegisterScreen(),
-                ),
+                () => const RegisterScreen(),
+                transition: Transition.rightToLeft),
             color: Colors.white,
             border: Border.all(color: Colors.grey.shade500),
             child: Text(

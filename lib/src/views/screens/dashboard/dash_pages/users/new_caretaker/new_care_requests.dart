@@ -98,10 +98,12 @@ class _NewCareRequestsState extends State<NewCareRequests> {
                           onSuccess: () async {
                             await dashboardController.actionOnApplication(
                                 caretakerId: caretaker.userid);
+                            Get.back();
                           },
                           onReject: () async {
                             await dashboardController.actionOnApplication(
                                 caretakerId: caretaker.userid, reject: true);
+                            Get.back();
                           },
                         ));
                       },

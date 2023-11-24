@@ -10,8 +10,8 @@ class DependencyInjector {
   }
 
   static void _injectControllers() {
-    Get.lazyPut(() => AuthController());
-    Get.lazyPut(() => DashboardController());
+    Get.lazyPut(() => AuthController(), fenix: true);
+    Get.lazyPut(() => DashboardController(), fenix: true);
     Get.lazyPut(() => UserController(), fenix: true);
     Get.lazyPut(() => ReportController(), fenix: true);
   }

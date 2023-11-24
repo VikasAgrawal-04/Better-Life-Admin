@@ -152,8 +152,8 @@ class ApptCaretaker {
   final String aadhar;
   final String address;
   final String pincode;
-  final String city;
-  final String state;
+  final String? city;
+  final String? state;
   final String dateofbirth;
   final String employedat;
   final String profile;
@@ -171,8 +171,8 @@ class ApptCaretaker {
       required this.aadhar,
       required this.address,
       required this.pincode,
-      required this.city,
-      required this.state,
+      this.city,
+      this.state,
       required this.dateofbirth,
       required this.employedat,
       required this.profile,

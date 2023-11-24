@@ -14,7 +14,7 @@ class UserDashPage extends StatelessWidget {
     return Column(
       children: [
         const Align(
-            alignment: Alignment.topLeft, child: HeaderText(text: 'USERS')),
+            alignment: Alignment.topLeft, child: HeaderText(text: 'Users')),
         Gap(30.h),
         CustomButton(
           text: 'Caretakers',

@@ -1,5 +1,6 @@
 import 'package:better_life_admin/src/controllers/dashboard_controller.dart';
 import 'package:better_life_admin/src/core/utils/constants/constants.dart';
+import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
 import 'package:better_life_admin/src/views/widgets/sliver_list/my_sliver_list.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -58,7 +59,7 @@ class _AllAppointmentState extends State<AllAppointment> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              appt.visitdate,
+                              Helpers.displayDate(appt.visitdate),
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium
