@@ -20,7 +20,7 @@ class ActiveTabbarView extends StatelessWidget {
       padding: kPadding,
       child: RefreshIndicator(
           child: Obx(() => MySliverList(
-              title: 'Active Cartakers',
+              title: 'Active Caretakers',
               status: userControl.status.value,
               itemBuilder: (context, index) {
                 final caretaker = userControl.caretakerLists[index];

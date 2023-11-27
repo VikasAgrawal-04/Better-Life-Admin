@@ -52,7 +52,7 @@ class _NewCareRequestsState extends State<NewCareRequests> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      Helpers.dateFormat(caretaker.entrydatetime),
+                      Helpers.displayDate(caretaker.entrydatetime),
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium

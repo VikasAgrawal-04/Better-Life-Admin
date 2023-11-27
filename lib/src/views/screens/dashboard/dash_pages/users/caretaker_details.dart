@@ -1,5 +1,6 @@
 import 'package:better_life_admin/src/controllers/user_controller.dart';
 import 'package:better_life_admin/src/core/utils/constants/constants.dart';
+import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
 import 'package:better_life_admin/src/views/widgets/global/my_appbar.dart';
 import 'package:better_life_admin/src/views/widgets/sliver_list/my_sliver_list.dart';
 import 'package:flutter/material.dart';
@@ -39,15 +40,17 @@ class CaretakerDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
                       children: [
                         Text(
-                          appt.visitdate,
+                          Helpers.displayDate(appt.visitdate),
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium
                               ?.copyWith(fontWeight: FontWeight.w700),
                         ),
+                        const Spacer(),
                         Text(
                           appt.pickuptime,
                           style: Theme.of(context)
@@ -59,17 +62,19 @@ class CaretakerDetails extends StatelessWidget {
                     ),
                     const Gap(5),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
                       children: [
                         SizedBox(
-                            width: 30.w,
+                            width: 38.w,
                             child: Text(
                               'Patient : ${appt.patientname}',
                               textAlign: TextAlign.start,
                               overflow: TextOverflow.ellipsis,
                             )),
+                        const Spacer(),
                         SizedBox(
-                            width: 30.w,
+                            width: 38.w,
                             child: Text(
                               'Doctor : ${appt.doctor}',
                               textAlign: TextAlign.end,
@@ -79,44 +84,51 @@ class CaretakerDetails extends StatelessWidget {
                     ),
                     const Gap(5),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
                       children: [
                         SizedBox(
-                            width: 30.w,
+                            width: 38.w,
                             child: Text(
                               'Hosptial : ${appt.hospital}',
                               textAlign: TextAlign.start,
+                              maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )),
                         const Spacer(),
                         SizedBox(
-                            width: 30.w,
+                            width: 38.w,
                             child: Text(
                               'Purpose : ${appt.purpose}',
                               textAlign: TextAlign.end,
+                              maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )),
                       ],
                     ),
                     const Gap(5),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
                       children: [
                         SizedBox(
-                            width: 30.w,
+                            width: 38.w,
                             child: Text(
                               'Address : ${appt.address}',
                               textAlign: TextAlign.start,
+                              maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )),
                         const Spacer(),
                         SizedBox(
-                            width: 30.w,
-                            child: Text(
-                              'Amount : ${appt.amount}',
-                              textAlign: TextAlign.end,
-                              overflow: TextOverflow.ellipsis,
-                            )),
+                          width: 38.w,
+                          child: Text(
+                            'Amount : ${appt.amount}',
+                            textAlign: TextAlign.end,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
                       ],
                     ),
                   ],
