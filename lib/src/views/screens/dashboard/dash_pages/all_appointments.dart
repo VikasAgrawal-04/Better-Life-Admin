@@ -1,6 +1,7 @@
 import 'package:better_life_admin/src/controllers/dashboard_controller.dart';
 import 'package:better_life_admin/src/core/utils/constants/constants.dart';
 import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
+import 'package:better_life_admin/src/views/widgets/rating/rating.dart';
 import 'package:better_life_admin/src/views/widgets/sliver_list/my_sliver_list.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -81,7 +82,16 @@ class _AllAppointmentState extends State<AllAppointment> {
                         const Gap(5),
                         Text('Hospital : ${appt.hospital}'),
                         const Gap(5),
-                        Text('Caretaker : ${appt.doctor}')
+                        Row(
+                          children: [
+                            Text('Caretaker : ${appt.doctor}'),
+                            const Spacer(),
+                            if (appt.rating != null) ...{
+                              Ratings(rating: appt.rating!.toDouble())
+                            }
+                          ],
+                        ),
+                        const Gap(5),
                       ],
                     ),
                   );

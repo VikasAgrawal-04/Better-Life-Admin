@@ -34,6 +34,7 @@ dependencies:
   json_annotation: ^4.8.1
   syncfusion_flutter_datepicker: ^23.2.4
   syncfusion_flutter_charts: ^23.2.4
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:
