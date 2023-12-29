@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
 
 part 'appt_response_model.g.dart';
@@ -66,6 +67,7 @@ class ApptData {
   final String? ratecomment2;
   final ApptCustomer? appointment_customer;
   final ApptCaretaker? appointment_caretaker;
+  final ApptCaretakerUser? appointment_caretaker_user;
 
   ApptData(
       {required this.apptid,
@@ -109,7 +111,8 @@ class ApptData {
       this.rating2,
       this.ratecomment2,
       required this.appointment_customer,
-      this.appointment_caretaker});
+      this.appointment_caretaker,
+      this.appointment_caretaker_user});
 
   factory ApptData.fromJson(Map<String, dynamic> json) =>
       _$ApptDataFromJson(json);
@@ -186,4 +189,28 @@ class ApptCaretaker {
       _$ApptCaretakerFromJson(json);
 
   Map<String, dynamic> toJson() => _$ApptCaretakerToJson(this);
+}
+
+@JsonSerializable()
+class ApptCaretakerUser {
+  @JsonKey(name: 'userid')
+  int userId;
+
+  @JsonKey(name: 'fullname')
+  String fullName;
+
+  String email;
+  String mobile;
+
+  ApptCaretakerUser({
+    required this.userId,
+    required this.fullName,
+    required this.email,
+    required this.mobile,
+  });
+
+  factory ApptCaretakerUser.fromJson(Map<String, dynamic> json) =>
+      _$ApptCaretakerUserFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ApptCaretakerUserToJson(this);
 }

@@ -73,6 +73,10 @@ ApptData _$ApptDataFromJson(Map<String, dynamic> json) => ApptData(
           ? null
           : ApptCaretaker.fromJson(
               json['appointment_caretaker'] as Map<String, dynamic>),
+      appointment_caretaker_user: json['appointment_caretaker_user'] == null
+          ? null
+          : ApptCaretakerUser.fromJson(
+              json['appointment_caretaker_user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ApptDataToJson(ApptData instance) => <String, dynamic>{
@@ -118,6 +122,7 @@ Map<String, dynamic> _$ApptDataToJson(ApptData instance) => <String, dynamic>{
       'ratecomment2': instance.ratecomment2,
       'appointment_customer': instance.appointment_customer,
       'appointment_caretaker': instance.appointment_caretaker,
+      'appointment_caretaker_user': instance.appointment_caretaker_user,
     };
 
 ApptCustomer _$ApptCustomerFromJson(Map<String, dynamic> json) => ApptCustomer(
@@ -183,4 +188,20 @@ Map<String, dynamic> _$ApptCaretakerToJson(ApptCaretaker instance) =>
       'approved': instance.approved,
       'candrive': instance.candrive,
       'approvedtodrive': instance.approvedtodrive,
+    };
+
+ApptCaretakerUser _$ApptCaretakerUserFromJson(Map<String, dynamic> json) =>
+    ApptCaretakerUser(
+      userId: json['userid'] as int,
+      fullName: json['fullname'] as String,
+      email: json['email'] as String,
+      mobile: json['mobile'] as String,
+    );
+
+Map<String, dynamic> _$ApptCaretakerUserToJson(ApptCaretakerUser instance) =>
+    <String, dynamic>{
+      'userid': instance.userId,
+      'fullname': instance.fullName,
+      'email': instance.email,
+      'mobile': instance.mobile,
     };

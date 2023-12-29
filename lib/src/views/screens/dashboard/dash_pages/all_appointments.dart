@@ -84,7 +84,8 @@ class _AllAppointmentState extends State<AllAppointment> {
                         const Gap(5),
                         Row(
                           children: [
-                            Text('Caretaker : ${appt.doctor}'),
+                            Text(
+                                'Caretaker : ${appt.appointment_caretaker_user == null ? "Not Assigned" : appt.appointment_caretaker_user?.fullName}'),
                             const Spacer(),
                             if (appt.rating != null) ...{
                               Ratings(rating: appt.rating!.toDouble())
