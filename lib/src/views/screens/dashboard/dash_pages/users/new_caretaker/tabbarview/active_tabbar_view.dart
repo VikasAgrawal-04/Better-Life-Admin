@@ -80,16 +80,6 @@ class ActiveTabbarView extends StatelessWidget {
                                   Axn.deactivate, caretaker.userid);
                             },
                           )),
-                          SizedBox(width: 4.w),
-                          Expanded(
-                              child: CustomButton(
-                            height: 3.5.h,
-                            text: 'Delete',
-                            onPressed: () async {
-                              await userControl.actionCaretaker(
-                                  Axn.delete, caretaker.userid);
-                            },
-                          )),
                         ],
                       )
                     ],

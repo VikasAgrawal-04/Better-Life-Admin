@@ -18,7 +18,7 @@ class DeactiveTabbarView extends StatelessWidget {
       padding: kPadding,
       child: RefreshIndicator(
           child: Obx(() => MySliverList(
-              title: 'Deactive Cartakers',
+              title: 'Deactive Caretakers',
               status: userControl.deactiveStatus.value,
               itemBuilder: (context, index) {
                 final caretaker = userControl.deactivedCareList[index];

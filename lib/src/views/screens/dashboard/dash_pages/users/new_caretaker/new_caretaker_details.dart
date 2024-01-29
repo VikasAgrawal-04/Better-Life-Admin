@@ -77,7 +77,7 @@ class _NewCaretakerDetailsState extends State<NewCaretakerDetails> {
               const Gap(5),
               Text(widget.data.address),
               const Gap(5),
-              Text('Aadhar : ${widget.data.address}'),
+              Text('Aadhar : ${widget.data.aadhar}'),
               const Gap(5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

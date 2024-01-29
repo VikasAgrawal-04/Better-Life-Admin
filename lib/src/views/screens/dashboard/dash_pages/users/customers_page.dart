@@ -98,16 +98,6 @@ class _VerifiedCustomerPageState extends State<VerifiedCustomerPage> {
                                   Axn.deactivate, customer.userid);
                             },
                           )),
-                          SizedBox(width: 4.w),
-                          Expanded(
-                              child: CustomButton(
-                            height: 3.5.h,
-                            text: 'Delete',
-                            onPressed: () async {
-                              await userController.actionCustomer(
-                                  Axn.delete, customer.userid);
-                            },
-                          )),
                         ],
                       )
                     ],
