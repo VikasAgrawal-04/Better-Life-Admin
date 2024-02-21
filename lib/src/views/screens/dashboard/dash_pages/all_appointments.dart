@@ -93,6 +93,9 @@ class _AllAppointmentState extends State<AllAppointment> {
                           ],
                         ),
                         const Gap(5),
+                        if (appt.ratecomment != null) ...{
+                          Text('Review : ${appt.ratecomment}'),
+                        }
                       ],
                     ),
                   );
