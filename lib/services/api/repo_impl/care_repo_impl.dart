@@ -48,4 +48,24 @@ class CareRepoImpl implements CareRepo {
       return Left(ServerFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> assignCaretaker(
+      {required int apptId, required String caretakerId}) async {
+    try {
+      final response = await Helpers.sendRequest(
+          RequestType.post, EndPoints.assignCaretakers,
+          queryParams: {'caretakerid': caretakerId, 'apptid': apptId});
+      if (response?['code'] != '200') {
+        return Left(ServerFailure(message: response?['message']));
+      }
+      return Right(response ?? {});
+    } on ServerException catch (error, s) {
+      debugPrintStack(stackTrace: s);
+      return Left(ServerFailure(message: error.message.toString()));
+    } catch (e, s) {
+      debugPrintStack(stackTrace: s);
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
 }

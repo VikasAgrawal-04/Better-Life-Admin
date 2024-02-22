@@ -1,6 +1,8 @@
 import 'package:better_life_admin/src/controllers/dashboard_controller.dart';
+import 'package:better_life_admin/src/controllers/user_controller.dart';
 import 'package:better_life_admin/src/core/utils/constants/constants.dart';
 import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
+import 'package:better_life_admin/src/views/widgets/buttons/custom_dropdown.dart';
 import 'package:better_life_admin/src/views/widgets/rating/rating.dart';
 import 'package:better_life_admin/src/views/widgets/sliver_list/my_sliver_list.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +19,14 @@ class AllAppointment extends StatefulWidget {
 
 class _AllAppointmentState extends State<AllAppointment> {
   final dashController = Get.find<DashboardController>();
+  final userController = Get.find<UserController>();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await dashController.fetchAppt();
+      await userController.fetchVerifiedCaretaker();
     });
   }
 
@@ -89,6 +93,28 @@ class _AllAppointmentState extends State<AllAppointment> {
                             const Spacer(),
                             if (appt.rating != null) ...{
                               Ratings(rating: appt.rating!.toDouble())
+                            },
+                            if (appt.appointment_caretaker_user == null) ...{
+                              Expanded(
+                                  child: Obx(() => CustomDropDown(
+                                      items: userController.caretakerLists
+                                          .map((element) => element.fullname)
+                                          .toList(),
+                                      value:
+                                          dashController.caretaker.value == ''
+                                              ? null
+                                              : dashController.caretaker.value,
+                                      itemValues: userController.caretakerLists
+                                          .map((element) =>
+                                              element.userid.toString())
+                                          .toList(),
+                                      onChanged: (value) {
+                                        dashController.caretaker.value =
+                                            value.toString();
+                                        dashController
+                                            .assignCaretaker(appt.apptid);
+                                      },
+                                      hint: 'Select Caretaker')))
                             }
                           ],
                         ),

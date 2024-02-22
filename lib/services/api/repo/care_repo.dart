@@ -6,4 +6,7 @@ abstract class CareRepo {
   Future<Either<Failure, NewCaretakerResponse>> getNewCaretaker();
   Future<Either<Failure, Map<String, dynamic>>> actionOnApplication(
       {required bool reject, required int caretakerId});
+
+  Future<Either<Failure, Map<String, dynamic>>> assignCaretaker(
+      {required int apptId, required String caretakerId});
 }

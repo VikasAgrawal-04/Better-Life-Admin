@@ -8,8 +8,8 @@ import 'package:better_life_admin/src/core/utils/helpers/status_handler.dart';
 import 'package:better_life_admin/src/models/response/appt_response_model.dart';
 import 'package:better_life_admin/src/models/response/new_caretaker_response.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/all_appointments.dart';
-import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/users/new_caretaker/new_care_requests.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/reports/reports_dash_page.dart';
+import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/users/new_caretaker/new_care_requests.dart';
 import 'package:better_life_admin/src/views/screens/dashboard/dash_pages/users/user_dash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,6 +35,7 @@ class DashboardController extends GetxController {
     )
   ];
   final dropValue = "Today's Appointments".obs;
+  RxString caretaker = ''.obs;
   final dashScreen = const [
     AllAppointment(),
     NewCareRequests(),
@@ -124,6 +125,17 @@ class DashboardController extends GetxController {
         status.value = Status.success;
       }
       apptList.addAll(r.apptData);
+    });
+  }
+
+  Future<void> assignCaretaker(int apptId) async {
+    final response = await _repo.assignCaretaker(
+        apptId: apptId, caretakerId: caretaker.value);
+    response.fold((l) {
+      debugPrint('Failure In assignCaretaker $l');
+    }, (r) {
+      fetchAppt();
+      debugPrint(r.toString());
     });
   }
 }
