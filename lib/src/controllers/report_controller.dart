@@ -67,7 +67,8 @@ class ReportController extends GetxController {
     final result = await _repo.fetchCareReports(
         caretakerId: caretakerId, fromDate: fromDate, toDate: toDate);
     result.fold((l) {
-      if (l.toString() == 'No Data Found!') {
+      if (l.toString() == 'No Data Found!' ||
+          l.toString() == "Unprocessable Content") {
         caretakerStatus.value = Status.empty;
       } else {
         caretakerStatus.value = Status.error;

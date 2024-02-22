@@ -19,7 +19,7 @@ class DeleteTabbarView extends StatelessWidget {
       child: RefreshIndicator(
           child: Obx(() => MySliverList(
               title: 'Rejected Caretakers',
-              status: userControl.deactiveStatus.value,
+              status: userControl.rejectedStatus.value,
               itemBuilder: (context, index) {
                 final caretaker = userControl.rejectedCareList[index];
                 return Container(

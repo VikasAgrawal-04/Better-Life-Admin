@@ -71,7 +71,7 @@ class _AllAppointmentState extends State<AllAppointment> {
                                   ?.copyWith(fontWeight: FontWeight.w700),
                             ),
                             Text(
-                              appt.pickuptime,
+                              Helpers.displayTime(appt.pickuptime),
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium
@@ -82,9 +82,9 @@ class _AllAppointmentState extends State<AllAppointment> {
                         const Gap(5),
                         Text(appt.patientname),
                         const Gap(5),
-                        Text(appt.pickaddress),
+                        Text('Pickup Location : ${appt.pickaddress}'),
                         const Gap(5),
-                        Text('Hospital : ${appt.hospital}'),
+                        Text('Hospital Location : ${appt.hospital}'),
                         const Gap(5),
                         Row(
                           children: [
@@ -96,6 +96,7 @@ class _AllAppointmentState extends State<AllAppointment> {
                             },
                             if (appt.appointment_caretaker_user == null) ...{
                               Expanded(
+                                  flex: 3,
                                   child: Obx(() => CustomDropDown(
                                       items: userController.caretakerLists
                                           .map((element) => element.fullname)

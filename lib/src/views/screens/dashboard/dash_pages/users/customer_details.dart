@@ -1,5 +1,6 @@
 import 'package:better_life_admin/src/controllers/user_controller.dart';
 import 'package:better_life_admin/src/core/utils/constants/constants.dart';
+import 'package:better_life_admin/src/core/utils/helpers/helpers.dart';
 import 'package:better_life_admin/src/views/widgets/global/my_appbar.dart';
 import 'package:better_life_admin/src/views/widgets/sliver_list/my_sliver_list.dart';
 import 'package:flutter/material.dart';
@@ -41,14 +42,14 @@ class CustomerDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          appt.visitdate,
+                          Helpers.displayNew(appt.visitdate),
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium
                               ?.copyWith(fontWeight: FontWeight.w700),
                         ),
                         Text(
-                          appt.pickuptime,
+                          Helpers.displayTime(appt.pickuptime),
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium
@@ -59,16 +60,18 @@ class CustomerDetails extends StatelessWidget {
                     const Gap(5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
                       children: [
                         SizedBox(
-                            width: 30.w,
+                            width: 40.w,
                             child: Text(
                               'Patient : ${appt.patientname}',
                               textAlign: TextAlign.start,
                               overflow: TextOverflow.ellipsis,
                             )),
                         SizedBox(
-                            width: 30.w,
+                            width: 40.w,
                             child: Text(
                               'Doctor : ${appt.doctor}',
                               textAlign: TextAlign.end,
@@ -79,17 +82,20 @@ class CustomerDetails extends StatelessWidget {
                     const Gap(5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
                       children: [
                         SizedBox(
-                            width: 30.w,
+                            width: 40.w,
                             child: Text(
                               'Hosptial : ${appt.hospital}',
                               textAlign: TextAlign.start,
                               overflow: TextOverflow.ellipsis,
+                              maxLines: 4,
                             )),
                         const Spacer(),
                         SizedBox(
-                            width: 30.w,
+                            width: 40.w,
                             child: Text(
                               'Purpose : ${appt.purpose}',
                               textAlign: TextAlign.end,
@@ -100,9 +106,11 @@ class CustomerDetails extends StatelessWidget {
                     const Gap(5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
                       children: [
                         SizedBox(
-                            width: 30.w,
+                            width: 40.w,
                             child: Text(
                               'Address : ${appt.address}',
                               textAlign: TextAlign.start,
@@ -110,13 +118,19 @@ class CustomerDetails extends StatelessWidget {
                             )),
                         const Spacer(),
                         SizedBox(
-                            width: 30.w,
+                            width: 40.w,
                             child: Text(
                               'Amount : ${appt.amount}',
                               textAlign: TextAlign.end,
                               overflow: TextOverflow.ellipsis,
                             )),
                       ],
+                    ),
+                    const Gap(5),
+                    Text(
+                      'Status : ${appt.finished == "1" ? "Completed" : appt.iscancelled == "1" ? "Cancelled" : "Not Completed"}',
+                      textAlign: TextAlign.end,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),

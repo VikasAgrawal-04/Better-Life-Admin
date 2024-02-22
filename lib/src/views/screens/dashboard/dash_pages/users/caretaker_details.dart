@@ -52,7 +52,7 @@ class CaretakerDetails extends StatelessWidget {
                         ),
                         const Spacer(),
                         Text(
-                          appt.pickuptime,
+                          Helpers.displayTime(appt.pickuptime),
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium

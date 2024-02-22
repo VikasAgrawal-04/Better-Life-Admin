@@ -91,7 +91,9 @@ class Helpers {
 
       if (response.statusCode == 200) {
         return response.data as Map<String, dynamic>;
-      } else if (response.statusCode == 400 || response.statusCode == 202) {
+      } else if (response.statusCode == 400 ||
+          response.statusCode == 202 ||
+          response.statusCode == 422) {
         throw ServerException(
             code: response.statusCode, message: response.statusMessage);
       } else {
@@ -167,5 +169,14 @@ class Helpers {
 
   static String displayDate(String date) {
     return DateFormat('dd/MM/yyyy').format(DateTime.parse(date));
+  }
+
+  static String displayNew(String date) {
+    return DateFormat('dd/MM/yyyy')
+        .format(DateFormat("yyyy-MM-dd").parse(date));
+  }
+
+  static String displayTime(String date) {
+    return DateFormat('hh:mm a').format(DateFormat("HH:mm:ss").parse(date));
   }
 }
