@@ -31,6 +31,24 @@ class UserRepoImpl implements UserRepo {
   }
 
   @override
+  Future<Either<Failure, VerifiedCustomerResponse>> deactiveCustomer() async {
+    try {
+      final response = await Helpers.sendRequest(
+          RequestType.put, EndPoints.deactivedCustomer);
+      if (response?['code'] != '200') {
+        return Left(ServerFailure(message: response?['message']));
+      }
+      return Right(VerifiedCustomerResponse.fromJson(response ?? {}));
+    } on ServerException catch (error, s) {
+      debugPrintStack(stackTrace: s);
+      return Left(ServerFailure(message: error.message.toString()));
+    } catch (e, s) {
+      debugPrintStack(stackTrace: s);
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, VerifiedCaretakerModel>>
       fetchVerifiedCaretaker() async {
     try {

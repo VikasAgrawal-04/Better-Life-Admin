@@ -8,6 +8,8 @@ import 'package:dartz/dartz.dart';
 
 abstract class UserRepo {
   Future<Either<Failure, VerifiedCustomerResponse>> fetchVerifiedCustomer();
+  Future<Either<Failure, VerifiedCustomerResponse>> deactiveCustomer();
+
   Future<Either<Failure, VerifiedCaretakerModel>> fetchVerifiedCaretaker();
   Future<Either<Failure, VerifiedCaretakerModel>> fetchDeletedCaretaker();
   Future<Either<Failure, VerifiedCaretakerModel>> fetchDeactivatedCaretaker();

@@ -22,6 +22,7 @@ class EndPoints {
   static const String deactivedCaretakers = '/deactive-caretakers';
   static const String rejectedCaretakers = '/rejected-caretakers';
   static const String assignCaretakers = '/assign-caretaker-appointment';
+  static const String deactivedCustomer = '/all_deactive_customers';
 
   //Appointment
   static const String upcomingAppt = '/all-upcoming-appointments';

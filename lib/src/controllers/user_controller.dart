@@ -13,12 +13,14 @@ import 'package:get/get.dart';
 class UserController extends GetxController {
   final UserRepo _repo = UserRepoImpl();
   final status = Status.initial.obs;
+  final deactiveCusStatus = Status.initial.obs;
   final deactiveStatus = Status.initial.obs;
   final rejectedStatus = Status.initial.obs;
   final detailStatus = Status.initial.obs;
 
   //API Lists
   final customerLists = <VerifiedCustomers>[].obs;
+  final deactiverCustomerLists = <VerifiedCustomers>[].obs;
   final caretakerLists = <VerifiedCaretaker>[].obs;
   final deactivedCareList = <VerifiedCaretaker>[].obs;
   final rejectedCareList = <VerifiedCaretaker>[].obs;
@@ -38,6 +40,23 @@ class UserController extends GetxController {
       } else {
         customerLists.addAll(r.customerData);
         status.value = Status.success;
+      }
+    });
+  }
+
+  Future<void> deactiveCustomer() async {
+    deactiveCusStatus.value = Status.loading;
+    final result = await _repo.deactiveCustomer();
+    result.fold((l) {
+      deactiveCusStatus.value = Status.error;
+      debugPrint("Failure In deactiveCustomer $l");
+    }, (r) {
+      deactiverCustomerLists.clear();
+      if (r.customerData.isEmpty) {
+        deactiveCusStatus.value = Status.empty;
+      } else {
+        deactiverCustomerLists.addAll(r.customerData);
+        deactiveCusStatus.value = Status.success;
       }
     });
   }
@@ -110,6 +129,7 @@ class UserController extends GetxController {
     result.fold((l) => debugPrint("Failure In actionCustomer $l"), (r) {
       Dialogs.success(r['message'], onTap: () {
         fetchVerifiedCustomers();
+        deactiveCustomer();
         Get.back();
       });
     });
