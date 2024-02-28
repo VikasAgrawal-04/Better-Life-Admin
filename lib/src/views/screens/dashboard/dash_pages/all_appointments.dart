@@ -85,45 +85,60 @@ class _AllAppointmentState extends State<AllAppointment> {
                         Text('Pickup Location : ${appt.pickaddress}'),
                         const Gap(5),
                         Text('Hospital Location : ${appt.hospital}'),
-                        const Gap(5),
-                        Row(
-                          children: [
-                            Text(
-                                'Caretaker : ${appt.appointment_caretaker_user == null ? "Not Assigned" : appt.appointment_caretaker_user?.fullName}'),
-                            const Spacer(),
-                            if (appt.rating != null) ...{
-                              Ratings(rating: appt.rating!.toDouble())
-                            },
-                            if (appt.appointment_caretaker_user == null ||
-                                (appt.numbercaretakers == 2 &&
-                                    appt.caretaker2 == null)) ...{
+                        SizedBox(
+                          height: 5.h,
+                          child: Row(
+                            children: [
                               Expanded(
-                                  flex: 3,
-                                  child: Obx(() => CustomDropDown(
-                                      items: userController.caretakerLists
-                                          .map((element) => element.fullname)
-                                          .toList(),
-                                      value:
-                                          dashController.caretaker.value == ''
-                                              ? null
-                                              : dashController.caretaker.value,
-                                      itemValues: userController.caretakerLists
-                                          .map((element) =>
-                                              element.userid.toString())
-                                          .toList(),
-                                      onChanged: (value) {
-                                        dashController.caretaker.value =
-                                            value.toString();
-                                        dashController
-                                            .assignCaretaker(appt.apptid);
-                                      },
-                                      hint: 'Select Caretaker')))
-                            }
-                          ],
+                                child: Text(
+                                    'Caretaker : ${appt.appointment_caretaker_user == null ? "Not Assigned" : appt.appointment_caretaker_user?.fullName}'),
+                              ),
+                              if (appt.rating != null) ...{
+                                const Spacer(),
+                                Ratings(rating: appt.rating!.toDouble())
+                              },
+                              if (appt.appointment_caretaker_user == null ||
+                                  (appt.numbercaretakers == 2 &&
+                                      appt.caretaker2 == null)) ...{
+                                SizedBox(width: 4.w),
+                                Expanded(
+                                    child: Obx(() => CustomDropDown(
+                                        items: userController.caretakerLists
+                                            .where((element) =>
+                                                element.fullname !=
+                                                appt.appointment_caretaker_user
+                                                    ?.fullName)
+                                            .toList()
+                                            .map((e) => e.fullname)
+                                            .toList(),
+                                        value: dashController.caretaker.value ==
+                                                ''
+                                            ? null
+                                            : dashController.caretaker.value,
+                                        itemValues: userController
+                                            .caretakerLists
+                                            .where((element) =>
+                                                element.fullname !=
+                                                appt.appointment_caretaker_user
+                                                    ?.fullName)
+                                            .toList()
+                                            .map((e) => e.userid.toString())
+                                            .toList(),
+                                        onChanged: (value) {
+                                          dashController.caretaker.value =
+                                              value.toString();
+                                          dashController
+                                              .assignCaretaker(appt.apptid);
+                                        },
+                                        hint: 'Select Caretaker')))
+                              }
+                            ],
+                          ),
                         ),
-                        if (appt.numbercaretakers == 2)
+                        if (appt.numbercaretakers == 2) ...{
                           Text(
                               'Caretaker 2 : ${appt.appointment_caretaker_user2 == null ? "Not Assigned" : appt.appointment_caretaker_user2?.fullName}'),
+                        },
                         const Gap(5),
                         if (appt.ratecomment != null) ...{
                           Text('Review : ${appt.ratecomment}'),
