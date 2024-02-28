@@ -62,7 +62,7 @@ ApptData _$ApptDataFromJson(Map<String, dynamic> json) => ApptData(
       tests: json['tests'] as String,
       diet: json['diet'] as String,
       numbercaretakers: json['numbercaretakers'] as int,
-      caretaker2: json['caretaker2'] as String?,
+      caretaker2: json['caretaker2'] as int?,
       rating2: json['rating2'] as int?,
       ratecomment2: json['ratecomment2'] as String?,
       appointment_customer: json['appointment_customer'] == null
@@ -77,6 +77,14 @@ ApptData _$ApptDataFromJson(Map<String, dynamic> json) => ApptData(
           ? null
           : ApptCaretakerUser.fromJson(
               json['appointment_caretaker_user'] as Map<String, dynamic>),
+      appointment_caretaker2: json['appointment_caretaker2'] == null
+          ? null
+          : ApptCaretaker.fromJson(
+              json['appointment_caretaker2'] as Map<String, dynamic>),
+      appointment_caretaker_user2: json['appointment_caretaker_user2'] == null
+          ? null
+          : ApptCaretakerUser.fromJson(
+              json['appointment_caretaker_user2'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ApptDataToJson(ApptData instance) => <String, dynamic>{
@@ -123,6 +131,8 @@ Map<String, dynamic> _$ApptDataToJson(ApptData instance) => <String, dynamic>{
       'appointment_customer': instance.appointment_customer,
       'appointment_caretaker': instance.appointment_caretaker,
       'appointment_caretaker_user': instance.appointment_caretaker_user,
+      'appointment_caretaker2': instance.appointment_caretaker2,
+      'appointment_caretaker_user2': instance.appointment_caretaker_user2,
     };
 
 ApptCustomer _$ApptCustomerFromJson(Map<String, dynamic> json) => ApptCustomer(

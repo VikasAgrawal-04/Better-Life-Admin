@@ -57,11 +57,9 @@ VerifiedCaretaker _$VerifiedCaretakerFromJson(Map<String, dynamic> json) =>
       createdatetime: json['createdatetime'] as String,
       isotpverified: json['isotpverified'] as String,
       fcm: json['firebase_device_token'] as String,
-      careAppt: json['caretaker_appointment'] == null
-          ? []
-          : (json['caretaker_appointment'] as List<dynamic>)
-              .map((e) => CareAppointment.fromJson(e as Map<String, dynamic>))
-              .toList(),
+      careAppt: (json['caretaker_appointment'] as List<dynamic>)
+          .map((e) => CareAppointment.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$VerifiedCaretakerToJson(VerifiedCaretaker instance) =>
@@ -137,7 +135,7 @@ CareAppointment _$CareAppointmentFromJson(Map<String, dynamic> json) =>
       tests: json['tests'] as String,
       diet: json['diet'] as String,
       numbercaretakers: json['numbercaretakers'] as int,
-      caretaker2: json['caretaker2'] as String?,
+      caretaker2: json['caretaker2'] as int?,
       rating2: json['rating2'] as int?,
       ratecomment2: json['ratecomment2'] as String?,
     );

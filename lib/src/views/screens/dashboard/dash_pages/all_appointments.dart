@@ -94,7 +94,9 @@ class _AllAppointmentState extends State<AllAppointment> {
                             if (appt.rating != null) ...{
                               Ratings(rating: appt.rating!.toDouble())
                             },
-                            if (appt.appointment_caretaker_user == null) ...{
+                            if (appt.appointment_caretaker_user == null ||
+                                (appt.numbercaretakers == 2 &&
+                                    appt.caretaker2 == null)) ...{
                               Expanded(
                                   flex: 3,
                                   child: Obx(() => CustomDropDown(
@@ -119,6 +121,9 @@ class _AllAppointmentState extends State<AllAppointment> {
                             }
                           ],
                         ),
+                        if (appt.numbercaretakers == 2)
+                          Text(
+                              'Caretaker 2 : ${appt.appointment_caretaker_user2 == null ? "Not Assigned" : appt.appointment_caretaker_user2?.fullName}'),
                         const Gap(5),
                         if (appt.ratecomment != null) ...{
                           Text('Review : ${appt.ratecomment}'),

@@ -135,6 +135,7 @@ class DashboardController extends GetxController {
       debugPrint('Failure In assignCaretaker $l');
     }, (r) {
       fetchAppt();
+      caretaker.value == '';
       debugPrint(r.toString());
     });
   }

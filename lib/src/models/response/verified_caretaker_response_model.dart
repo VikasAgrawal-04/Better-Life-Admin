@@ -135,7 +135,7 @@ class CareAppointment {
   final String tests;
   final String diet;
   final int numbercaretakers;
-  final String? caretaker2;
+  final int? caretaker2;
   final int? rating2;
   final String? ratecomment2;
 

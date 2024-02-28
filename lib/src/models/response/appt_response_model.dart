@@ -62,12 +62,14 @@ class ApptData {
   final String tests;
   final String diet;
   final int numbercaretakers;
-  final String? caretaker2;
+  final int? caretaker2;
   final int? rating2;
   final String? ratecomment2;
   final ApptCustomer? appointment_customer;
   final ApptCaretaker? appointment_caretaker;
   final ApptCaretakerUser? appointment_caretaker_user;
+  final ApptCaretaker? appointment_caretaker2;
+  final ApptCaretakerUser? appointment_caretaker_user2;
 
   ApptData(
       {required this.apptid,
@@ -107,12 +109,14 @@ class ApptData {
       required this.tests,
       required this.diet,
       required this.numbercaretakers,
-      required this.caretaker2,
+      this.caretaker2,
       this.rating2,
       this.ratecomment2,
       required this.appointment_customer,
       this.appointment_caretaker,
-      this.appointment_caretaker_user});
+      this.appointment_caretaker_user,
+      this.appointment_caretaker2,
+      this.appointment_caretaker_user2});
 
   factory ApptData.fromJson(Map<String, dynamic> json) =>
       _$ApptDataFromJson(json);
