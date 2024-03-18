@@ -21,7 +21,7 @@ Future<void> main() async {
   FirebaseMessaging.onBackgroundMessage(bgHandler);
   DependencyInjector.inject();
   SharedPreferences.getInstance().then((prefs) {
-    Helpers.prefs = prefs; // Set the instance in your Helpers class
+    Helpers.prefs = prefs;
     final token = prefs.getString(Keys.token);
     final dio = Dio(BaseOptions(
         baseUrl: 'https://goasocialmediamarketing.com/betterlifeapi/api',
@@ -43,7 +43,6 @@ Future<void> bgHandler(RemoteMessage message) async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(
